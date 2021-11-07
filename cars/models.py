@@ -1,9 +1,11 @@
 from datetime import datetime
 
+from ckeditor.fields import RichTextField
 from django.db import models
-
+from multiselectfield import MultiSelectField
 
 # Create your models here.
+
 
 class Car(models.Model):
     state_choices = (
@@ -96,15 +98,15 @@ class Car(models.Model):
     mileage = models.IntegerField()
     transmission = models.CharField(max_length=200)
     body_design = models.CharField(max_length=200)
-    car_features = models.CharField(choices=feature_choices, max_length=200)
+    car_features = MultiSelectField(choices=feature_choices)
     price = models.IntegerField()
     model_year = models.IntegerField('year', choices=year_choice)
-    description = models.TextField(max_length=1000)
-    main_photo = models.ImageField(upload_to='photos/%Y/%m/%d')
-    temp_photo_1 = models.ImageField(upload_to='photos/%Y/%m/%d', blank=True)
-    temp_photo_2 = models.ImageField(upload_to='photos/%Y/%m/%d', blank=True)
-    temp_photo_3 = models.ImageField(upload_to='photos/%Y/%m/%d', blank=True)
-    temp_photo_4 = models.ImageField(upload_to='photos/%Y/%m/%d', blank=True)
+    description = RichTextField()
+    main_photo = models.ImageField(upload_to='photo/%Y/%m/%d')
+    temp_photo_1 = models.ImageField(upload_to='photo/%Y/%m/%d', blank=True)
+    temp_photo_2 = models.ImageField(upload_to='photo/%Y/%m/%d', blank=True)
+    temp_photo_3 = models.ImageField(upload_to='photo/%Y/%m/%d', blank=True)
+    temp_photo_4 = models.ImageField(upload_to='photo/%Y/%m/%d', blank=True)
     passengers = models.IntegerField()
     VIN = models.CharField(max_length=50)
     no_of_previous_owners = models.IntegerField()
